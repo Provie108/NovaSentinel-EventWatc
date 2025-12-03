@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaSentinel EventWatch – Contact Form</title>
+
+  <style>
+    /* GLOBAL */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", sans-serif;
+      background: radial-gradient(circle at top, #1a122b, #0a0812 60%);
+      color: #f0eaff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* CARD */
+    .container {
+      background: rgba(18, 15, 29, 0.9);
+      backdrop-filter: blur(6px);
+      padding: 40px 28px;
+      border-radius: 18px;
+      width: 92%;
+      max-width: 420px;
+      border: 1px solid rgba(156, 78, 255, 0.35);
+      box-shadow: 0 0 38px rgba(156, 78, 255, 0.28);
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HEADER */
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 26px;
+      color: #c383ff;
+      font-weight: 700;
+      text-shadow: 0 0 16px rgba(195, 131, 255, 0.6);
+    }
+
+    /* LABEL */
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #cbb1ff;
+      font-weight: 500;
+    }
+
+    /* INPUTS */
+    input, textarea {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(156, 78, 255, 0.25);
+      border-radius: 10px;
+      background: rgba(12, 10, 20, 0.85);
+      color: #f8f3ff;
+      font-size: 15px;
+      transition: 0.28s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #b56dff;
+      box-shadow: 0 0 10px rgba(181, 109, 255, 0.6);
+      background: rgba(16, 14, 25, 0.95);
+    }
+
+    /* BUTTON */
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #b56dff, #7a35ff);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.28s ease;
+      box-shadow: 0 0 18px rgba(156, 78, 255, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #c983ff, #8b3dff);
+      transform: translateY(-2px);
+      box-shadow: 0 0 26px rgba(156, 78, 255, 0.55);
+    }
+
+    /* Button Shine Animation */
+    button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: skewX(-20deg);
+      transition: all 0.5s ease;
+    }
+
+    button:hover::after {
+      left: 160%;
+    }
+
+    /* LOADING SPINNER */
+    .loading {
+      display: none;
+      width: 22px;
+      height: 22px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top: 3px solid #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* MOBILE OPTIMIZATION */
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 22px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>NovaSentinel EventWatch</h1>
+    
+    <form id="nsForm" method="POST" action="https://provie-108.app.n8n.cloud/webhook/eventwatch">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+
+      <button id="submitBtn" type="submit">Submit</button>
+
+      <div class="loading" id="loader"></div>
+    </form>
+
+  </div>
+
+  <script>
+    const form = document.getElementById("nsForm");
+    const button = document.getElementById("submitBtn");
+    const loader = document.getElementById("loader");
+
+    form.addEventListener("submit", () => {
+      button.style.display = "none";
+      loader.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
