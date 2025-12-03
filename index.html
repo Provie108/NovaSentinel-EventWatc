@@ -37,7 +37,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* HEADER */
     h1 {
       text-align: center;
       margin-bottom: 25px;
@@ -47,7 +46,6 @@
       text-shadow: 0 0 16px rgba(195, 131, 255, 0.6);
     }
 
-    /* LABEL */
     label {
       display: block;
       margin-bottom: 6px;
@@ -56,7 +54,6 @@
       font-weight: 500;
     }
 
-    /* INPUTS */
     input, textarea {
       width: 100%;
       padding: 13px;
@@ -76,7 +73,6 @@
       background: rgba(16, 14, 25, 0.95);
     }
 
-    /* BUTTON */
     button {
       width: 100%;
       padding: 15px;
@@ -99,7 +95,6 @@
       box-shadow: 0 0 26px rgba(156, 78, 255, 0.55);
     }
 
-    /* Button Shine Animation */
     button::after {
       content: "";
       position: absolute;
@@ -116,7 +111,6 @@
       left: 160%;
     }
 
-    /* LOADING SPINNER */
     .loading {
       display: none;
       width: 22px;
@@ -131,16 +125,6 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-
-    /* MOBILE OPTIMIZATION */
-    @media (max-width: 480px) {
-      .container {
-        padding: 30px 22px;
-      }
-      h1 {
-        font-size: 22px;
-      }
-    }
   </style>
 
 </head>
@@ -150,7 +134,7 @@
 
     <h1>NovaSentinel EventWatch</h1>
     
-    <form id="nsForm" method="POST" action="https://provie-108.app.n8n.cloud/webhook/eventwatch" onsubmit="redirect()">
+    <form id="nsForm">
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required />
 
@@ -167,25 +151,35 @@
 
   </div>
 
+  <!-- FINAL FIXED SCRIPT -->
   <script>
     const form = document.getElementById("nsForm");
     const button = document.getElementById("submitBtn");
     const loader = document.getElementById("loader");
 
-    form.addEventListener("submit", () => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
       button.style.display = "none";
       loader.style.display = "block";
+
+      const formData = new FormData(form);
+
+      try {
+        await fetch("https://provie-108.app.n8n.cloud/webhook/eventwatch", {
+          method: "POST",
+          body: formData
+        });
+
+        window.location.href = "success.html";
+
+      } catch (error) {
+        alert("Something went wrong. Try again.");
+        button.style.display = "block";
+        loader.style.display = "none";
+      }
     });
   </script>
 
-<script>
-  function redirect() {
-    setTimeout(() => {
-      window.location.href = "success.html";
-    }, 500); // wait 0.5s so the POST sends properly
-  }
-</script>
-
 </body>
 </html>
-
