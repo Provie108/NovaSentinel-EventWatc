@@ -78,7 +78,7 @@ Every submission triggers an automated message sent to a Telegram bot using the 
 
 ##  **Screenshots ()**
 
-You can add screenshots here like:
+
 <img width="1850" height="995" alt="image" src="https://github.com/user-attachments/assets/50835553-03ef-4dad-a962-9864e754eb50" />
 
 
