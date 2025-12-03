@@ -150,7 +150,7 @@
 
     <h1>NovaSentinel EventWatch</h1>
     
-    <form id="nsForm" method="POST" action="https://provie-108.app.n8n.cloud/webhook/eventwatch">
+    <form id="nsForm" method="POST" action="https://provie-108.app.n8n.cloud/webhook/eventwatch" onsubmit="redirect()">
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required />
 
@@ -177,6 +177,14 @@
       loader.style.display = "block";
     });
   </script>
+
+<script>
+  function redirect() {
+    setTimeout(() => {
+      window.location.href = "success.html";
+    }, 500); // wait 0.5s so the POST sends properly
+  }
+</script>
 
 </body>
 </html>
